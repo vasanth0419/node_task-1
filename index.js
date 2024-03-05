@@ -5,6 +5,10 @@ import { format } from "date-fns";
 const time = express();
 
 const PORT = 4000;
+time.get("/:universalURL", (req, res) => {
+  res.send("404 URL NOT FOUND");
+});
+
 
 time.get("/write", (req, res) => {
   const current_date_time = format(new Date(), "dd-MM-yyyy-HH-mm-ss");
