@@ -6,7 +6,9 @@ import path from "path";
 const time = express();
 
 const PORT = 4000;
-
+time.get("/", (req, res) => {
+  res.status(200).json({ message: "server is connected" });
+});
 time.get("/write", (req, res) => {
   const current_date_time = format(new Date(), "dd-MM-yyyy-HH-mm-ss");
   const filePath = `current_Time_stamp/${current_date_time}.txt`;
@@ -20,19 +22,13 @@ time.get("/getTextFiles", (req, res) => {
   fs.readdir(filepath, (err, files) => {
     if (err) {
       console.log(err);
-      res
-        .status(500)
-        .send(" error ");
+      res.status(500).send(" error ");
     } else {
       const textFiles = files.filter((file) => path.extname(file) === ".txt");
       res.status(200).json(textFiles);
     }
   });
 });
-
-
-
-
 
 time.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
