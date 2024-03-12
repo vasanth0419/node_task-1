@@ -1,6 +1,7 @@
 import express from "express";
 import fs from "fs";
 import { format } from "date-fns";
+import path from "path";
 
 const time = express();
 
@@ -21,7 +22,7 @@ time.get("/getTextFiles", (req, res) => {
       console.log(err);
       res
         .status(500)
-        .send("An error occurred while listing the files from directory");
+        .send(" error ");
     } else {
       const textFiles = files.filter((file) => path.extname(file) === ".txt");
       res.status(200).json(textFiles);
